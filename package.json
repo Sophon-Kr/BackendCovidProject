@@ -1,0 +1,27 @@
+{
+  "name": "backendcovidproject",
+  "version": "1.0.0",
+  "description": "\"# BackendCovidProject\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sophon-Kr/BackendCovidProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sophon-Kr/BackendCovidProject/issues"
+  },
+  "homepage": "https://github.com/Sophon-Kr/BackendCovidProject#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "node": "^17.3.0",
+    "pg": "^8.7.1",
+    "postgres": "^1.0.2",
+    "typeorm": "^0.2.41"
+  }
+}
