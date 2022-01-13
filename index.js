@@ -7,10 +7,14 @@ app.use(cors());
 // app.use(express.urlencoded({ limit: "50mb" }));
 // app.use(express.static(__dirname));
 
+const { DatabaseConfig } = require("./database/databaseConfig");
+const DatabaseConnect = require("./database/databaseConnect").DatabaseConnect;
+const databaseConfig = DatabaseConfig();
+
 const test = require("./routers/test");
 
-const serve = app.listen(port.proof, () => {
-  console.log("Server listening on ", port.proof);
+const serve = app.listen(5000, () => {
+  console.log("Server listening on ", 5000);
 });
 
 try {

@@ -2,14 +2,19 @@ const express = require("express");
 const router = express.Router();
 const getConnection = require("typeorm");
 
+var resp = {
+  status: "1000",
+  msg: "Access Denied",
+  content: [],
+};
 
 router.get("/test", async (req, res, next) => {
   try {
     resp.content = [];
     const connection = getConnection.createQueryBuilder();
-    const asset = await connection.from(`asset`).getRawMany();
+    const realday = await connection.select("*").from(`realday`).getRawMany();
 
-    resp.content.push(asset[0]);
+    resp.content.push(realday);
     resp.status = "2000";
     resp.msg = "Success";
     res.send(resp);
@@ -47,4 +52,4 @@ router.get("/test", async (req, res, next) => {
 //   }
 // });
 
-// module.exports = router;
+module.exports = router;
