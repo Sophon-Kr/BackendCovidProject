@@ -12,6 +12,7 @@ const DatabaseConnect = require("./database/databaseConnect").DatabaseConnect;
 const databaseConfig = DatabaseConfig();
 
 const test = require("./routers/test");
+const sendMail = require("./routers/sendMail");
 
 const serve = app.listen(5000, () => {
   console.log("Server listening on ", 5000);
@@ -21,6 +22,7 @@ try {
   const dbConn = new DatabaseConnect(databaseConfig).getConnection();
   dbConn.then(async () => {
     app.use(test);
+    app.use(sendMail);
   });
 } catch (error) {
   console.log(error);

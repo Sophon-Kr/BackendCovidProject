@@ -33,7 +33,7 @@ router.post("/sendmail", async (req, res, next) => {
         console.log("Email sent: " + info.response);
       }
     });
-    
+
     resp.content.push(sendMail);
     resp.status = "2000";
     resp.msg = "Success";
@@ -43,3 +43,5 @@ router.post("/sendmail", async (req, res, next) => {
     res.send(resp);
   }
 });
+
+module.exports = router;
