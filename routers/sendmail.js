@@ -10,6 +10,9 @@ var resp = {
 };
 
 router.post("/sendmail", async (req, res, next) => {
+  const { sendTo, sendFrom, subjectData, sendText } = req.body;
+  console.log("req", req.body);
+
   try {
     var transporter = nodemailer.createTransport({
       service: "gmail",
@@ -20,19 +23,31 @@ router.post("/sendmail", async (req, res, next) => {
     });
 
     var mailOptions = {
-      from: "testmyemaol@gmail.com",
-      to: "sophonkripinit@gmail.com",
-      subject: "Sending Email using Node.js",
-      text: "That was easy!",
+      from: sendFrom,
+      to: sendTo,
+      subject: subjectData,
+      text: sendText,
     };
 
-    const sendMail = transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
+    // var mailOptions = {
+    //   from: "testmyemaol@gmail.com",
+    //   to: "sophonkripinit@gmail.com",
+    //   subject: "Sending Email using Node.js",
+    //   text: "That was easy!",
+    // };
+
+    const sendMail = await transporter.sendMail(
+      mailOptions,
+      function (error, info) {
+        if (error) {
+          console.log(error);
+          return error;
+        } else {
+          return info.response;
+          console.log("Email sent: " + info.response);
+        }
       }
-    });
+    );
 
     resp.content.push(sendMail);
     resp.status = "2000";
