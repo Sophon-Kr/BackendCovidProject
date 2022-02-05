@@ -9,6 +9,15 @@ var resp = {
 };
 
 router.get("/test", async (req, res, next) => {
+  const hello = "Covid-19 Backend API";
+
+  resp.content.push(hello);
+  resp.status = "2000";
+  resp.msg = "Success";
+  res.send(resp);
+});
+
+router.get("/test", async (req, res, next) => {
   try {
     resp.content = [];
     const connection = getConnection.createQueryBuilder();
