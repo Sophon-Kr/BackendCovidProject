@@ -14,42 +14,6 @@ router.post("/sendmail", async (req, res, next) => {
   console.log("req", req.body);
   resp.content = [];
   try {
-    // var transporter = nodemailer.createTransport({
-    //   host: "smtp.gmail.com",
-    //   port: "587",
-    //   auth: {
-    //     user: "covidmodel01@gmail.com",
-    //     pass: "covidcovid",
-    //   },
-    // });
-
-    // var mailOptions = {
-    //   from: sendFrom,
-    //   to: ["covidmodel01@gmail.com", "sophonkripinit@gmail.com"],
-    //   subject: subjectData,
-    //   text: sendText,
-    // };
-
-    // // var mailOptions = {
-    // //   from: "testmyemaol@gmail.com",
-    // //   to: "sophonkripinit@gmail.com",
-    // //   subject: "Sending Email using Node.js",
-    // //   text: "That was easy!",
-    // // };
-
-    // const sendMail = await transporter.sendMail(
-    //   mailOptions,
-    //   function (error, info) {
-    //     if (error) {
-    //       console.log(error);
-    //       return error;
-    //     } else {
-    //       return info.response;
-    //       console.log("Email sent: " + info.response);
-    //     }
-    //   }
-    // );
-
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: "587",
