@@ -10,46 +10,64 @@ var resp = {
 };
 
 router.post("/sendmail", async (req, res, next) => {
-  const { sendTo, sendFrom, subjectData, sendText } = req.body;
+  const { sendFrom, subjectData, sendText } = req.body;
   console.log("req", req.body);
-
+  resp.content = [];
   try {
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
+    // var transporter = nodemailer.createTransport({
+    //   host: "smtp.gmail.com",
+    //   port: "587",
+    //   auth: {
+    //     user: "covidmodel01@gmail.com",
+    //     pass: "covidcovid",
+    //   },
+    // });
+
+    // var mailOptions = {
+    //   from: sendFrom,
+    //   to: ["covidmodel01@gmail.com", "sophonkripinit@gmail.com"],
+    //   subject: subjectData,
+    //   text: sendText,
+    // };
+
+    // // var mailOptions = {
+    // //   from: "testmyemaol@gmail.com",
+    // //   to: "sophonkripinit@gmail.com",
+    // //   subject: "Sending Email using Node.js",
+    // //   text: "That was easy!",
+    // // };
+
+    // const sendMail = await transporter.sendMail(
+    //   mailOptions,
+    //   function (error, info) {
+    //     if (error) {
+    //       console.log(error);
+    //       return error;
+    //     } else {
+    //       return info.response;
+    //       console.log("Email sent: " + info.response);
+    //     }
+    //   }
+    // );
+
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: "587",
       auth: {
         user: "covidmodel01@gmail.com",
         pass: "covidcovid",
       },
     });
 
-    var mailOptions = {
-      from: sendFrom,
-      to: sendTo,
+    let info = await transporter.sendMail({
+      from: "user" + `${sendFrom}`,
+      to: ["covidmodel01@gmail.com", "sophonkripinit@gmail.com"],
       subject: subjectData,
-      text: sendText,
-    };
+      text: `${sendFrom}` + ":" + sendText,
+    });
+    console.log("info", info.response);
 
-    // var mailOptions = {
-    //   from: "testmyemaol@gmail.com",
-    //   to: "sophonkripinit@gmail.com",
-    //   subject: "Sending Email using Node.js",
-    //   text: "That was easy!",
-    // };
-
-    const sendMail = await transporter.sendMail(
-      mailOptions,
-      function (error, info) {
-        if (error) {
-          console.log(error);
-          return error;
-        } else {
-          return info.response;
-          console.log("Email sent: " + info.response);
-        }
-      }
-    );
-
-    resp.content.push(sendMail);
+    resp.content.push(info.response);
     resp.status = "2000";
     resp.msg = "Success";
     res.send(resp);
